@@ -12,6 +12,7 @@ function TeamsForm({addTeam}) {
 
     async function getSingleTeam() {
         const response = await axios.get(`http://127.0.0.1:8000/api/teams/${teamId}/`)
+        console.log(response)
         setFormData(response.data)
         setName(response.data.name)
     }
@@ -38,7 +39,7 @@ function TeamsForm({addTeam}) {
             })
         }
         if(response.status === 201 || response.status === 200){
-            navigate('/teams')
+            navigate('/manager/teams')
         }
 
     }

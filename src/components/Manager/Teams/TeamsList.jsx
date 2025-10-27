@@ -44,7 +44,7 @@ function TeamsList() {
                                     <li key={team.id}>
                                         {team.name}
                                         <button onClick={() => deleteTeam(team.id)}>Delete</button>
-                                        <button onClick={() => navigate(`/teams/${team.id}/edit`)}>Edit</button>
+                                        <button onClick={() => navigate(`/manager/teams/${team.id}/edit`)}>Edit</button>
                                     </li>
                                 ))
                             }
