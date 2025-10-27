@@ -11,7 +11,7 @@ function TeamsList() {
     }
 
     async function addTeam(name) {
-        const response = await axios.post('http://127.0.0.1:8000/api/teams/')
+        const response = await axios.post('http://127.0.0.1:8000/api/teams/' , {name})
         setTeams([...teams, response.data])
         
     }
@@ -42,7 +42,6 @@ function TeamsList() {
                     )
                    
             }
-            <h1>Add a new Team</h1>
             <TeamsForm addTeam={addTeam}/>
             
         </div>

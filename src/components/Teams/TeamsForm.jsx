@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react'
 import axios from 'axios'
 import { useNavigate , useParams } from 'react-router'
 
-function TeamsForm() { 
+function TeamsForm({addTeam}) { 
     const [name,setName]= useState('')
     const {teamId } = useParams()
     const navigate = useNavigate()
@@ -32,7 +32,10 @@ function TeamsForm() {
             response = await axios.patch(`http://127.0.0.1:8000/api/teams/${teamId}/`, formData)
         }
         else{
-            response = await axios.post('http://127.0.0.1:8000/api/teams/', formData)
+            addTeam(formData.name)
+            setFormData({
+                name:''
+            })
         }
         if(response.status === 201 || response.status === 200){
             navigate('/teams')
@@ -40,7 +43,18 @@ function TeamsForm() {
 
     }
   return (
-    <div>TeamsForm</div>
+    <div>
+        <h1>{  teamId ?  `Edit ${name}` : 'Add a new team👥'} </h1>
+        <form onSubmit={handleSubmit} >
+            <div>
+                <label htmlFor='name'>Team Name : </label>
+                <input value={formData.name} onChange={handleChange} id='name' name='name' />
+
+            </div>
+            <button type='submit'>Submit</button>
+        </form>
+            
+    </div>
   )
 }
 
