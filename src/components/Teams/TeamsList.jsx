@@ -1,9 +1,12 @@
 import {useState,useEffect} from 'react'
 import TeamsForm from './TeamsForm'
 import axios from 'axios'
+import { Link } from 'react-router'
+import { useNavigate } from 'react-router'
 
 function TeamsList() {
     const [teams, setTeams] = useState([])
+    const navigate = useNavigate()
 
     async function getAllTeams() {
         const response = await axios.get('http://127.0.0.1:8000/api/teams/')
@@ -15,6 +18,14 @@ function TeamsList() {
         setTeams([...teams, response.data])
         
     }
+    async function deleteTeam(teamId) {
+    try {
+        await axios.delete(`http://127.0.0.1:8000/api/teams/${teamId}/`)
+        setTeams(teams.filter(t => t.id !== teamId))
+    } catch (err) {
+        console.log(err)
+    }
+}
 
     useEffect(() => {
         getAllTeams()
@@ -32,6 +43,8 @@ function TeamsList() {
                                 teams.map(team => (
                                     <li key={team.id}>
                                         {team.name}
+                                        <button onClick={() => deleteTeam(team.id)}>Delete</button>
+                                        <button onClick={() => navigate(`/teams/${team.id}/edit`)}>Edit</button>
                                     </li>
                                 ))
                             }
