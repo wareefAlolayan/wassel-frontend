@@ -1,9 +1,16 @@
 import React from 'react'
 import axios from 'axios'
+import { BrowserRouter as Router, Routes, Route } from 'react-router'
+import TeamsList from './components/Teams/TeamsList'
 
 function App() {
   return (
-    <div>App</div>
+    <Router>
+      <NavBar />
+      <Routes>
+        <Route path='/cats' element={<TeamsList />} />
+      </Routes>
+    </Router>
   )
 }
 
