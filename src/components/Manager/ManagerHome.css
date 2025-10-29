@@ -1,0 +1,93 @@
+.manager-home {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw; 
+  justify-content: top;  
+  align-items: center;  
+}
+
+.top-bar{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 15vh;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.bar-left {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;  
+  align-items: center;    
+  text-align: left;
+  padding-left: 20px;
+}
+
+.bar-welcome{
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  color: #0a0402;
+  margin-left: 15px;
+}
+.bar-welcome p{
+    margin: 0;
+    padding: 0;
+}
+.bar-welcome #manager-name{
+  color :#5f5c5c;
+}
+
+.logo {
+  height: 10vh;
+  margin-right: 20px; 
+}
+
+.logout-btn {
+background-color: #f8f5f0; 
+  border: 1px solid #d9e2ec; 
+  border-radius: 6px; 
+  color: #000000;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 8px 15px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  font-size: 0.95rem;
+  margin-right: 8px; 
+}
+
+.logout-btn:hover{
+  background-color: #fff4e3;
+  border-color: #fad2a4;
+  color: #554737;
+}
+
+.logout-btn .logout-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px; 
+  color: #000000; 
+}
+.logout-btn .logout-icon:hover {
+  color: #554737;
+}
+
+.home-body{
+    background-color: #fff6ec;
+    width: 100%;
+    height: 100%;
+}
+.home-body .nav-bar{
+    background-color: #ffffff;
+    width: 90%;
+    height: 10%;
+    border-radius: 10px;
+    color: #000000;
+    margin: 5px;
+}
