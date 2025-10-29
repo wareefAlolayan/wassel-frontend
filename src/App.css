@@ -23,7 +23,7 @@
   align-items: center;
 }
 
-.logo {
+.left-side-content .logo {
   max-width: 200px;
   height: auto;
   margin-right: 20px; 
