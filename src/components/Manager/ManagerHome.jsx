@@ -79,4 +79,3 @@ function ManagerHome() {
 }
 
 export default ManagerHome
-

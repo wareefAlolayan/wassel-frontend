@@ -6,7 +6,18 @@ function ShiftBoard() {
     return (
         <div className='board-body'>
             <div className='info'>
-kjhdsdfghj
+                <div className='summary-box'>
+                    <div className='summary-title'>Coverage</div>
+                    <div className='summary-value'>100%</div>
+                </div>
+                <div className='summary-box'>
+                    <div className='summary-title'>Open Requests</div>
+                    <div className='summary-value'>4</div>
+                </div>
+                <div className='summary-box'>
+                    <div className='summary-title'>On Leave</div>
+                    <div className='summary-value'>0</div>
+                </div>
             </div>
             <div className='shift-board-container'>
                 <div className='board-nav'>
@@ -30,20 +41,108 @@ kjhdsdfghj
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Morning</td>
-                            <td>employees list</td>
-                            <td>employees list</td>
-                            <td>employees list</td>
-                            <td>employees list</td>
-                            <td>employees list</td>
+                            <td>Morning ☀️</td>
+                            <td>
+                                <div className="employee-chip">
+                                    <div className="status-dot" style={{ backgroundColor: 'orange' }}></div>  Sarah
+                                </div>
+
+                                <div className="employee-chip">
+                                    <div className="status-dot" style={{ backgroundColor: 'purple' }}></div> Wareef
+                                </div>
+                            </td>
+
+                            <td>
+                                <div className="employee-chip">
+                                    <div className="status-dot" style={{ backgroundColor: 'orange' }}></div>  Sarah
+                                </div>
+
+                                <div className="employee-chip">
+                                    <div className="status-dot" style={{ backgroundColor: 'purple' }}></div> Wareef
+                                </div>
+                            </td>
+
+                            <td>
+                                <div className="employee-chip">
+                                    <div className="status-dot" style={{ backgroundColor: 'orange' }}></div>  Sarah
+                                </div>
+
+                                <div className="employee-chip">
+                                    <div className="status-dot" style={{ backgroundColor: 'purple' }}></div> Wareef
+                                </div>
+                            </td>
+
+                            <td>
+                                <div className="employee-chip">
+                                    <div className="status-dot" style={{ backgroundColor: 'orange' }}></div>  Sarah
+                                </div>
+
+                                <div className="employee-chip">
+                                    <div className="status-dot" style={{ backgroundColor: 'purple' }}></div> Wareef
+                                </div>
+                            </td>
+
+                            <td>
+                                <div className="employee-chip">
+                                    <div className="status-dot" style={{ backgroundColor: 'orange' }}></div>  Sarah
+                                </div>
+
+                                <div className="employee-chip">
+                                    <div className="status-dot" style={{ backgroundColor: 'purple' }}></div> Wareef
+                                </div>
+                            </td>
                         </tr>
                         <tr>
-                            <td>Night</td>
-                            <td>employees list</td>
-                            <td>employees list</td>
-                            <td>employees list</td>
-                            <td>employees list</td>
-                            <td>employees list</td>
+                            <td>Night 🌙</td>
+
+                            <td>
+                                <div className="employee-chip">
+                                    <div className="status-dot" style={{ backgroundColor: 'orange' }}></div>  Sarah
+                                </div>
+
+                                <div className="employee-chip">
+                                    <div className="status-dot" style={{ backgroundColor: 'purple' }}></div> Wareef
+                                </div>
+                            </td>
+
+                            <td>
+                                <div className="employee-chip">
+                                    <div className="status-dot" style={{ backgroundColor: 'orange' }}></div>  Sarah
+                                </div>
+
+                                <div className="employee-chip">
+                                    <div className="status-dot" style={{ backgroundColor: 'purple' }}></div> Wareef
+                                </div>
+                            </td>
+
+                            <td>
+                                <div className="employee-chip">
+                                    <div className="status-dot" style={{ backgroundColor: 'orange' }}></div>  Sarah
+                                </div>
+
+                                <div className="employee-chip">
+                                    <div className="status-dot" style={{ backgroundColor: 'purple' }}></div> Wareef
+                                </div>
+                            </td>
+
+                            <td>
+                                <div className="employee-chip">
+                                    <div className="status-dot" style={{ backgroundColor: 'orange' }}></div>  Sarah
+                                </div>
+
+                                <div className="employee-chip">
+                                    <div className="status-dot" style={{ backgroundColor: 'purple' }}></div> Wareef
+                                </div>
+                            </td>
+                            <td>
+                                <div className="employee-chip">
+                                    <div className="status-dot" style={{ backgroundColor: 'orange' }}></div>  Sarah
+                                </div>
+
+                                <div className="employee-chip">
+                                    <div className="status-dot" style={{ backgroundColor: 'purple' }}></div> Wareef
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </div>
