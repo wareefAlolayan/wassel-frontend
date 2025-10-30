@@ -2,14 +2,13 @@ import {useEffect, useState} from 'react'
 import axios from 'axios'
 import { useNavigate , useParams } from 'react-router'
 
-function TeamsForm({addTeam}) { 
+function TeamsForm({addTeam , teamId , setEditTeam , setEditing ,teams, setTeams}) { 
     const [name,setName]= useState('')
-    const {teamId } = useParams()
     const navigate = useNavigate()
     const [formData , setFormData]=useState({
         name:''
     })
-
+    console.log(teamId)
     async function getSingleTeam() {
         const response = await axios.get(`http://127.0.0.1:8000/api/teams/${teamId}/`)
         console.log(response)
@@ -31,15 +30,15 @@ function TeamsForm({addTeam}) {
         let response = {}
         if(teamId){
             response = await axios.patch(`http://127.0.0.1:8000/api/teams/${teamId}/`, formData)
+            setTeams(teams.map(team => team.id === teamId ? { ...team, ...formData } : team)) // MDN find the specefic team and replace its onfo with form info
+            setEditing(false)
+            setEditTeam(null)
         }
         else{
             addTeam(formData.name)
             setFormData({
                 name:''
             })
-        }
-        if(response.status === 201 || response.status === 200){
-            navigate('/manager/teams')
         }
 
     }
