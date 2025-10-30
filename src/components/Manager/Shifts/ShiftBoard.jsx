@@ -10,11 +10,11 @@ function ShiftBoard() {
                     <div className='summary-title'>Coverage</div>
                     <div className='summary-value'>100%</div>
                 </div>
-                <div className='summary-box'>
+                <div className='summary-box red'>
                     <div className='summary-title'>Open Requests</div>
                     <div className='summary-value'>4</div>
                 </div>
-                <div className='summary-box'>
+                <div className='summary-box yellow'>
                     <div className='summary-title'>On Leave</div>
                     <div className='summary-value'>0</div>
                 </div>
@@ -29,6 +29,7 @@ function ShiftBoard() {
 
                 </div>
                 <div className='shifts-table'>
+                    <table>
                     <thead>
                         <tr>
                             <th>Shift type</th>
@@ -145,6 +146,10 @@ function ShiftBoard() {
                             </td>
                         </tr>
                     </tbody>
+                    
+                        
+                    </table>
+
                 </div>
             </div>
         </div>

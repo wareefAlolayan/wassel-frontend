@@ -59,6 +59,8 @@
     justify-content: center;
     width: 80%;
     margin: 10px 0;
+}
+table{
     border: 2px solid #cccbcb; 
     border-radius:18px;
 }
@@ -122,27 +124,38 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: 90%;
 }
 .summary-box {
     flex: 1; 
     padding: 20px;
     margin: 5px 10px;
     border-radius: 12px;
-    background-color: #ffffef;
+    background-color: #F8FEFA;
     display: flex;
     flex-direction: column;
     justify-content: center; 
-    text-align: center;
+    text-align: left;
+    width: 25px;
+    border: 1px solid#B9F8CF;
+}
+.red{
+    background-color:#FFF9F9;
+    border: 1px solid#FFCCD3;
+}
+.yellow{
+    background-color:#FFFDF5;
+    border: 1px solid#FEE685;
 }
 .summary-title {
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 400;
     color: #555;
     margin-bottom: 4px;
 }
 
 .summary-value {
     font-size: 1.5rem;
-    font-weight: 800;
+    font-weight: 600;
     color: #333;
 }
