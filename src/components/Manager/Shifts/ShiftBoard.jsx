@@ -2,17 +2,26 @@ import React from 'react'
 import { MdNavigateBefore, MdNavigateNext } from "react-icons/md"
 import './ShiftBoard.css'
 import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 function ShiftBoard() {
     const today = new Date() //ref reactgo Fri Oct 31 2025 17:09:20 GMT+0300 (Arabian Standard Time
     const thisWeekFirstDay = getFirstDayOfWeek(today)
     const [firstDay, setFirstDay] = useState(thisWeekFirstDay)
     const [weekDays, setWeekDays] = useState({})
-    // const todayDate = today.toLocaleDateString() //ref medium  10/31/2025
-    // const todayCode = today.getDay() // 0-6
-    // console.log(today)
-    // console.log(todayDate)
-    // console.log(todayCode)
+    const [shifts, setShifts] = useState([])
+    const [errors, setErrors] = useState(null)
+
+    async function getShifts() {
+        try {
+            const response = await axios.get(`http://127.0.0.1:8000/api/shifts`)
+            console.log(response.data)
+            setShifts(response.data)
+        } catch (error) {
+            console.log(error)
+            setErrors(error?.response?.data?.error)
+        }
+    }
 
     function getFirstDayOfWeek(today) {
         const dayIndex = today.getDay()  // 0=Sun 6=Sat
@@ -20,7 +29,6 @@ function ShiftBoard() {
         firstDay.setDate(today.getDate() - dayIndex) // go back to sunday
         return firstDay
     }
-    console.log('first day ' + firstDay)
 
     function createWeekDict(firstDay) {
         const week = {}
@@ -30,12 +38,12 @@ function ShiftBoard() {
             week[i] = {
                 code: i,// 0–6
                 dayDate: d.getDate(),  // 31
-                fullDate: d.toLocaleDateString()
+                fullDate: d.toLocaleDateString('en-CA') //mozilla+stackoverflow 
             }
         }
         return week
     }
-
+    console.log(createWeekDict(firstDay))
 
     function goPrevWeek() {
         const d = new Date(firstDay)
@@ -50,13 +58,37 @@ function ShiftBoard() {
 
 
     useEffect(() => {
+        getShifts()
         setWeekDays(createWeekDict(firstDay))
     }, [firstDay])
 
 
     const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday']
     const fiveDayCodes = [0, 1, 2, 3, 4]
+    const colors = ['#F59E0B', '#06B6D4', '#EC4899', '#84CC16', '#8B5CF6', '#14B8A6', '#F97316', '#6366F1']
+    function getColorForEmployee(employeeId) {
+        return colors[employeeId % colors.length]
+    }
 
+    function getEmployeesForShift(shiftType, dayDate) {
+        const findShifts = shifts.filter(shift => shift.date === dayDate && shift.shift_type === shiftType)
+        if (findShifts.length > 0) {
+            return findShifts[0].employees.map(emp => {
+                const color = getColorForEmployee(emp.id)
+                return (
+                    <div className="employee-chip" key={emp.id}>
+                        <div className="dot" style={{ backgroundColor: color }}></div>
+                        {emp.name}
+                    </div>
+                )
+            }
+            )
+        }
+    }
+
+    if (errors) {
+        return <h3>{errors}</h3>
+    }
     return (
         <div className='board-body'>
             <div className='info'>
@@ -99,107 +131,20 @@ function ShiftBoard() {
                         <tbody>
                             <tr>
                                 <td>Morning ☀️</td>
-                                <td>
-                                    <div className="employee-chip">
-                                        <div className="status-dot" style={{ backgroundColor: 'green' }}></div>  Sarah
-                                    </div>
-
-                                    <div className="employee-chip">
-                                        <div className="status-dot" style={{ backgroundColor: 'purple' }}></div> Wareef Alolayan
-                                    </div>
-                                </td>
-
-                                <td>
-                                    <div className="employee-chip">
-                                        <div className="status-dot" style={{ backgroundColor: 'green' }}></div>  Sarah
-                                    </div>
-
-                                    <div className="employee-chip">
-                                        <div className="status-dot" style={{ backgroundColor: 'purple' }}></div> Wareef
-                                    </div>
-                                </td>
-
-                                <td>
-                                    <div className="employee-chip">
-                                        <div className="status-dot" style={{ backgroundColor: 'green' }}></div>  Sarah
-                                    </div>
-
-                                    <div className="employee-chip">
-                                        <div className="status-dot" style={{ backgroundColor: 'purple' }}></div> Wareef
-                                    </div>
-                                </td>
-
-                                <td>
-                                    <div className="employee-chip">
-                                        <div className="status-dot" style={{ backgroundColor: 'green' }}></div>  Sarah
-                                    </div>
-
-                                    <div className="employee-chip">
-                                        <div className="status-dot" style={{ backgroundColor: 'purple' }}></div> Wareef
-                                    </div>
-                                </td>
-
-                                <td>
-                                    <div className="employee-chip">
-                                        <div className="status-dot" style={{ backgroundColor: 'green' }}></div>  Sarah
-                                    </div>
-
-                                    <div className="employee-chip">
-                                        <div className="status-dot" style={{ backgroundColor: 'purple' }}></div> Wareef
-                                    </div>
-                                </td>
+                                {fiveDayCodes.map((dayCode) => (
+                                    <td key={dayCode}>
+                                        {getEmployeesForShift('M', weekDays[dayCode]?.fullDate)}
+                                    </td>
+                                ))}
                             </tr>
                             <tr>
                                 <td>Night 🌙</td>
 
-                                <td>
-                                    <div className="employee-chip">
-                                        <div className="status-dot" style={{ backgroundColor: 'green' }}></div>  Sarah
-                                    </div>
-
-                                    <div className="employee-chip">
-                                        <div className="status-dot" style={{ backgroundColor: 'purple' }}></div> Wareef
-                                    </div>
-                                </td>
-
-                                <td>
-                                    <div className="employee-chip">
-                                        <div className="status-dot" style={{ backgroundColor: 'green' }}></div>  Sarah
-                                    </div>
-
-                                    <div className="employee-chip">
-                                        <div className="status-dot" style={{ backgroundColor: 'purple' }}></div> Wareef
-                                    </div>
-                                </td>
-
-                                <td>
-                                    <div className="employee-chip">
-                                        <div className="status-dot" style={{ backgroundColor: 'green' }}></div>  Sarah
-                                    </div>
-
-                                    <div className="employee-chip">
-                                        <div className="status-dot" style={{ backgroundColor: 'purple' }}></div> Wareef
-                                    </div>
-                                </td>
-
-                                <td>
-                                    <div className="employee-chip">
-                                        <div className="status-dot" style={{ backgroundColor: 'green' }}></div>  Sarah
-                                    </div>
-
-                                    <div className="employee-chip">
-                                        <div className="status-dot" style={{ backgroundColor: 'purple' }}></div> Wareef
-                                    </div>
-                                </td>
-                                <td>
-                                    <div className="employee-chip">
-                                        <div className="status-dot" style={{ backgroundColor: 'green' }}></div>  Sarah
-                                    </div>
-
-                                    <div className="employee-chip">
-                                        <div className="status-dot" style={{ backgroundColor: 'purple' }}></div> Wareef
-                                    </div>
-                                </td>
+                                {fiveDayCodes.map((dayCode) => (
+                                    <td key={dayCode}>
+                                        {getEmployeesForShift('N', weekDays[dayCode]?.fullDate)}
+                                    </td>
+                                ))}
                             </tr>
                         </tbody>
 
