@@ -10,12 +10,26 @@ function ShiftBoard() {
     const [firstDay, setFirstDay] = useState(thisWeekFirstDay)
     const [weekDays, setWeekDays] = useState({})
     const [shifts, setShifts] = useState([])
+    const [employees, setEmployees] = useState([])
     const [errors, setErrors] = useState(null)
+    let works = 0
 
+    let away = []
+    // const onLeave = [...new Set(away)] // geeksforgeeks
+
+    async function getEmployees() {
+        try {
+            const response = await axios.get(`http://127.0.0.1:8000/api/employees/`)
+            const nonManagers = response.data.filter(emp => emp.is_manager !== true)
+            setEmployees(nonManagers)  // Store non-manager employees
+        } catch (error) {
+            console.log(error)
+            setErrors(error?.response?.data?.error)
+        }
+    }
     async function getShifts() {
         try {
             const response = await axios.get(`http://127.0.0.1:8000/api/shifts`)
-            console.log(response.data)
             setShifts(response.data)
         } catch (error) {
             console.log(error)
@@ -58,6 +72,7 @@ function ShiftBoard() {
 
 
     useEffect(() => {
+        getEmployees()
         getShifts()
         setWeekDays(createWeekDict(firstDay))
     }, [firstDay])
@@ -86,6 +101,57 @@ function ShiftBoard() {
         }
     }
 
+    function calculateTotalWorks(date) {
+        let findShifts = shifts.filter(shift => shift.date === date && shift.shift_type === 'M')
+        if (findShifts.length > 0) {
+            findShifts[0].employees.forEach(emp => {
+                works += 1
+            })
+        }
+        findShifts = shifts.filter(shift => shift.date === date && shift.shift_type === 'N')
+        if (findShifts.length > 0) {
+            findShifts[0].employees.forEach(emp => {
+                works += 1
+            })
+        }
+    }
+    function findOnLeave(date) {
+        let workinEmp = []
+        let findShifts = shifts.filter(shift => shift.date === date && shift.shift_type === 'M')
+        if (findShifts.length > 0) {
+            findShifts[0].employees.forEach(emp => {
+                workinEmp.push(emp.id)
+            })
+        }
+        findShifts = shifts.filter(shift => shift.date === date && shift.shift_type === 'N')
+        if (findShifts.length > 0) {
+            findShifts[0].employees.forEach(emp => {
+                workinEmp.push(emp.id)
+            })
+        }
+        employees.forEach(employee => {
+            if (!workinEmp.includes(employee.id)) {
+                away.push(employee.id)
+            }
+
+        })
+        let onLeave = [...new Set(away)]
+        
+        console.log('away   :::::::::: ' +date+'  '+ away)
+        console.log('onleave   :::::::::: ' + onLeave)
+        console.log(onLeave.length)
+        return onLeave.length
+    }
+    function calculateOnLeave() {
+        let awayCount = 0
+        fiveDayCodes.forEach(c => {
+            awayCount = findOnLeave(weekDays[c]?.fullDate)
+        })
+        return awayCount
+    }
+
+    console.log('away   :::::::::: ' + away)
+
     if (errors) {
         return <h3>{errors}</h3>
     }
@@ -94,7 +160,11 @@ function ShiftBoard() {
             <div className='info'>
                 <div className='summary-box'>
                     <div className='summary-title'>Coverage</div>
-                    <div className='summary-value'>100%</div>
+                    {fiveDayCodes.map(c => (
+                        calculateTotalWorks(weekDays[c]?.fullDate)
+                    ))}
+                    <div className='summary-value'>{(works / 40) * 100}%</div>
+
                 </div>
                 <div className='summary-box red'>
                     <div className='summary-title'>Open Requests</div>
@@ -102,7 +172,7 @@ function ShiftBoard() {
                 </div>
                 <div className='summary-box yellow'>
                     <div className='summary-title'>On Leave</div>
-                    <div className='summary-value'>0</div>
+                    <div className='summary-value'>{calculateOnLeave()}</div>
                 </div>
             </div>
             <div className='shift-board-container'>
