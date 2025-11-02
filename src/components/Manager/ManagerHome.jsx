@@ -6,6 +6,7 @@ import { MdLogout } from "react-icons/md" //react-icons website
 import EmployeeList from './Employees/EmployeeList'
 import TeamsList from './Teams/TeamsList'
 import ShiftBoard from './Shifts/ShiftBoard'
+import Requests from './Requests/Requests'
 
 function ManagerHome() {
   const { managerId } = useParams()
@@ -67,7 +68,7 @@ function ManagerHome() {
 
         <div className='body'>
           {activeTab === 'board' && <div> <ShiftBoard/></div>}
-          {activeTab === 'requests' && <div>Requests content goes here</div>}
+          {activeTab === 'requests' && <div><Requests/></div>}
           {activeTab === 'employees' && <div><EmployeeList/></div>}
           {activeTab === 'teams' && <div><TeamsList/></div>}
         </div>
