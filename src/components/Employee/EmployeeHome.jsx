@@ -6,6 +6,7 @@ import { MdLogout, MdOutlineMail } from "react-icons/md" //react-icons website
 import { GoClock } from "react-icons/go"
 import { FaUmbrellaBeach } from "react-icons/fa"
 import Shifts from './Shifts/Shifts'
+import Requests from './Requests/Requests'
 
 function EmployeeHome() {
     const { employeeId } = useParams()
@@ -47,7 +48,6 @@ function EmployeeHome() {
     function handleTabClick(tab) {
         setActiveTab(tab)
     }
-
     if (errors) {
         return <h3>{errors}</h3>
     }
@@ -73,12 +73,12 @@ function EmployeeHome() {
                             <h2>{employee.team?.name}</h2>
                         </div>
                         <div className='contact-info'>
-                        <p><MdOutlineMail /> {employee.email} </p>
+                            <p><MdOutlineMail /> {employee.email} </p>
                         </div>
-                        <hr className='divider'/>
+                        <hr className='divider' />
                         <div className='status-info'>
-                        <p className='vacation'><FaUmbrellaBeach /> {employee.vaction_days_left} vacation days left </p>
-                        <p className='pending'> <GoClock /> {pendingRequests} pending request/s </p>
+                            <p className='vacation'><FaUmbrellaBeach /> {employee.vaction_days_left} vacation days left </p>
+                            <p className='pending'> <GoClock /> {pendingRequests} pending request/s </p>
                         </div>
                     </div>
 
@@ -96,8 +96,8 @@ function EmployeeHome() {
                     </div>
 
                     <div className='body'>
-                        {activeTab === 'myShifts' && <div> <Shifts/> </div>}
-                        {activeTab === 'requests' && <div> request component </div>}
+                        {activeTab === 'myShifts' && <div> <Shifts /> </div>}
+                        {activeTab === 'requests' && <div> <Requests employee={employee}/> </div>}
                     </div>
                 </div>
 
