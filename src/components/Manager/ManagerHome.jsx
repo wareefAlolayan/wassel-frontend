@@ -67,10 +67,10 @@ function ManagerHome() {
         </div>
 
         <div className='body'>
-          {activeTab === 'board' && <div> <ShiftBoard/></div>}
-          {activeTab === 'requests' && <div><Requests/></div>}
-          {activeTab === 'employees' && <div><EmployeeList/></div>}
-          {activeTab === 'teams' && <div><TeamsList/></div>}
+          {activeTab === 'board' && <div> <ShiftBoard /></div>}
+          {activeTab === 'requests' && <div><Requests /></div>}
+          {activeTab === 'employees' && <div><EmployeeList /></div>}
+          {activeTab === 'teams' && <div><TeamsList /></div>}
         </div>
       </div>
 

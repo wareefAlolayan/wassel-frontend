@@ -11,6 +11,7 @@ function ShiftBoard() {
     const [weekDays, setWeekDays] = useState({})
     const [shifts, setShifts] = useState([])
     const [employees, setEmployees] = useState([])
+    const [requests, setRequests] = useState([])
     const [errors, setErrors] = useState(null)
     let works = 0
 
@@ -70,11 +71,18 @@ function ShiftBoard() {
         setFirstDay(d)
     }
 
+    async function getVacationRequests() {
+        const response = await axios.get('http://127.0.0.1:8000/api/vrequests/')
+        const pendingRequests = response.data.filter(request => request.status === 'P')
+        setRequests(pendingRequests)
+    }
+
 
     useEffect(() => {
         getEmployees()
         getShifts()
         setWeekDays(createWeekDict(firstDay))
+        getVacationRequests()
     }, [firstDay])
 
 
@@ -136,8 +144,8 @@ function ShiftBoard() {
 
         })
         let onLeave = [...new Set(away)]
-        
-        console.log('away   :::::::::: ' +date+'  '+ away)
+
+        console.log('away   :::::::::: ' + date + '  ' + away)
         console.log('onleave   :::::::::: ' + onLeave)
         console.log(onLeave.length)
         return onLeave.length
@@ -149,8 +157,6 @@ function ShiftBoard() {
         })
         return awayCount
     }
-
-    console.log('away   :::::::::: ' + away)
 
     if (errors) {
         return <h3>{errors}</h3>
@@ -168,7 +174,7 @@ function ShiftBoard() {
                 </div>
                 <div className='summary-box red'>
                     <div className='summary-title'>Open Requests</div>
-                    <div className='summary-value'>4</div>
+                    <div className='summary-value'>{requests.length}</div>
                 </div>
                 <div className='summary-box yellow'>
                     <div className='summary-title'>On Leave</div>
