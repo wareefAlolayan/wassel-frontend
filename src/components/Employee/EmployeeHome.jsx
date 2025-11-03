@@ -4,7 +4,8 @@ import { useParams } from 'react-router'
 import './EmployeeHome.css'
 import { MdLogout, MdOutlineMail } from "react-icons/md" //react-icons website
 import { GoClock } from "react-icons/go"
-import { FaUmbrellaBeach } from "react-icons/fa";
+import { FaUmbrellaBeach } from "react-icons/fa"
+import Shifts from './Shifts/Shifts'
 
 function EmployeeHome() {
     const { employeeId } = useParams()
@@ -95,7 +96,7 @@ function EmployeeHome() {
                     </div>
 
                     <div className='body'>
-                        {activeTab === 'myShifts' && <div> shifts component </div>}
+                        {activeTab === 'myShifts' && <div> <Shifts/> </div>}
                         {activeTab === 'requests' && <div> request component </div>}
                     </div>
                 </div>
