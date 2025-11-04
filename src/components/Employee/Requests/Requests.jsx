@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { authRequest } from '../../lib/auth'
 import { useParams } from 'react-router'
 import RequestForm from './RequestForm'
 
@@ -16,7 +17,7 @@ function Requests({ employee }) {
 
     async function getVacationRequests() {
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/vrequests/`)
+            const response = await authRequest({method:'get',url:`http://127.0.0.1:8000/api/vrequests/`})
             setAllRequests(response.data)
         } catch (error) {
             console.log(error)
@@ -40,14 +41,14 @@ function Requests({ employee }) {
 
 
     async function createRequest(requestData) {
-        const response = await axios.post(`http://127.0.0.1:8000/api/vrequests/employee/${employee.id}`,requestData)
+        const response = await authRequest({method:'post',url:`http://127.0.0.1:8000/api/vrequests/employee/${employee.id}`,data:requestData})
         setAllRequests([...allRequests, response.data])
 
     }
 
     async function deleteRequest(requestId) {
         try {
-            await axios.delete(`http://127.0.0.1:8000/api/vrequests/${requestId}`)
+            await authRequest({method:'delete',url:`http://127.0.0.1:8000/api/vrequests/${requestId}`})
             setAllRequests(allRequests.filter(r => r.id !== requestId))
         } catch (err) {
             console.log(err)

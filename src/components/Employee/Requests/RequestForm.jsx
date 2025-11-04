@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { authRequest } from '../../lib/auth'
 import { useParams } from 'react-router'
 import './RequestForm.css'
 
@@ -12,7 +13,7 @@ function RequestForm({ requestId, setEditReq, setEditing, setAllRequests, allReq
     const { employeeId } = useParams()
 
     async function getSingleRequest() {
-        const response = await axios.get(`http://127.0.0.1:8000/api/vrequests/${requestId}`)
+        const response = await authRequest({method:'get',url:`http://127.0.0.1:8000/api/vrequests/${requestId}`})
         setFormData(response.data)
     }
 
@@ -31,7 +32,7 @@ function RequestForm({ requestId, setEditReq, setEditing, setAllRequests, allReq
         event.preventDefault()
         let response = {}
         if (requestId) {
-            response = await axios.patch(`http://127.0.0.1:8000/api/vrequests/${requestId}`, formData)
+            response = await authRequest({method:'post',url:`http://127.0.0.1:8000/api/vrequests/${requestId}`,data: formData})
             setAllRequests(allRequests.map(request => request.id === requestId ? { ...request, ...formData } : request))
             setEditing(false)
             setEditReq(null)

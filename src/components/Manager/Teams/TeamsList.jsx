@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import TeamsForm from './TeamsForm'
 import axios from 'axios'
 import { useNavigate } from 'react-router'
+import { authRequest } from '../../lib/auth'
 
 function TeamsList() {
     const [teams, setTeams] = useState([])
@@ -10,18 +11,18 @@ function TeamsList() {
     const [editTeam, setEditTeam] = useState(null)
 
     async function getAllTeams() {
-        const response = await axios.get('http://127.0.0.1:8000/api/teams/')
+        const response = await authRequest({method:'get',url:'http://127.0.0.1:8000/api/teams/'})
         setTeams(response.data)
     }
 
     async function addTeam(name) {
-        const response = await axios.post('http://127.0.0.1:8000/api/teams/', { name })
+        const response = await authRequest({method:'post',url:'http://127.0.0.1:8000/api/teams/',data: { name }})
         setTeams([...teams, response.data])
 
     }
     async function deleteTeam(teamId) {
         try {
-            await axios.delete(`http://127.0.0.1:8000/api/teams/${teamId}/`)
+            await authRequest({method:'delete',url:`http://127.0.0.1:8000/api/teams/${teamId}/`})
             setTeams(teams.filter(t => t.id !== teamId))
         } catch (err) {
             console.log(err)

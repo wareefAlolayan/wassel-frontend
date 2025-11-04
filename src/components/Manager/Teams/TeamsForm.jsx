@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import axios from 'axios'
 import { useNavigate , useParams } from 'react-router'
+import { authRequest } from '../../lib/auth'
 
 function TeamsForm({addTeam , teamId , setEditTeam , setEditing ,teams, setTeams}) { 
     const [name,setName]= useState('')
@@ -10,7 +11,7 @@ function TeamsForm({addTeam , teamId , setEditTeam , setEditing ,teams, setTeams
     })
     console.log(teamId)
     async function getSingleTeam() {
-        const response = await axios.get(`http://127.0.0.1:8000/api/teams/${teamId}/`)
+        const response = await authRequest({method:'get',url:`http://127.0.0.1:8000/api/teams/${teamId}/`})
         console.log(response)
         setFormData(response.data)
         setName(response.data.name)
@@ -29,7 +30,7 @@ function TeamsForm({addTeam , teamId , setEditTeam , setEditing ,teams, setTeams
         event.preventDefault()
         let response = {}
         if(teamId){
-            response = await axios.patch(`http://127.0.0.1:8000/api/teams/${teamId}/`, formData)
+            response = await authRequest({method:'patch',url:`http://127.0.0.1:8000/api/teams/${teamId}/`,data: formData})
             setTeams(teams.map(team => team.id === teamId ? { ...team, ...formData } : team)) // MDN find the specefic team and replace its onfo with form info
             setEditing(false)
             setEditTeam(null)

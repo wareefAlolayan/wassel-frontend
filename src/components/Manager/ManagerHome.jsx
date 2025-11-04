@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router'
 import './ManagerHome.css'
-import { MdLogout } from "react-icons/md" //react-icons website
 import EmployeeList from './Employees/EmployeeList'
 import TeamsList from './Teams/TeamsList'
 import ShiftBoard from './Shifts/ShiftBoard'
 import Requests from './Requests/Requests'
+import { authRequest } from '../lib/auth'
+import LogOutButton from '../Auth/LogOutButton'
 
-function ManagerHome() {
+function ManagerHome({setUser}) {
   const { managerId } = useParams()
   const [manager, setManager] = useState({})
   const [errors, setErrors] = useState(null)
@@ -16,7 +17,7 @@ function ManagerHome() {
 
   async function getManager() {
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/api/employees/${managerId}`)
+      const response = await authRequest({method:'get',url:`http://127.0.0.1:8000/api/employees/${managerId}`})
       console.log(response.data)
       setManager(response.data)
     } catch (error) {
@@ -48,7 +49,7 @@ function ManagerHome() {
           </div>
 
         </div>
-        <button className="logout-btn"><MdLogout />Logout</button>
+        <LogOutButton setUser={setUser}/>
       </div>
       <div className='home-body'>
         <div className='nav-bar'>

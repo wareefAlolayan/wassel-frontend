@@ -1,28 +1,29 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { authRequest } from '../../lib/auth'
 
 function Requests() {
     const [requests, setRequests] = useState([])
     const [employees, setEmployees] = useState([])
 
     async function getVacationRequests() {
-        const response = await axios.get('http://127.0.0.1:8000/api/vrequests/')
+        const response = await authRequest({method:'get',url:'http://127.0.0.1:8000/api/vrequests/'})
         const pendingRequests = response.data.filter(request => request.status === 'P')
         setRequests(pendingRequests)
     }
 
     async function getEmployees() {
-        const response = await axios.get('http://127.0.0.1:8000/api/employees/')
+        const response = await authRequest({method:'get',url:'http://127.0.0.1:8000/api/employees/'})
         setEmployees(response.data)
     }
     
 
     async function handleApprove(requestId) {
-        await axios.patch(`http://127.0.0.1:8000/api/vrequests/${requestId}/accept/`)
+        await authRequest({method:'patch',url:`http://127.0.0.1:8000/api/vrequests/${requestId}/accept/`})
         getVacationRequests()
     }
     async function handleDeny(requestId) {
-        await axios.patch(`http://127.0.0.1:8000/api/vrequests/${requestId}/deny/`)
+        await authRequest({method:'patch',url:`http://127.0.0.1:8000/api/vrequests/${requestId}/deny/`})
         getVacationRequests()
     }
 

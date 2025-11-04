@@ -1,23 +1,27 @@
-import React from 'react'
-import axios from 'axios'
 import { BrowserRouter as Router, Routes, Route } from 'react-router'
-import TeamsList from './components/Manager/Teams/TeamsList'
-import TeamsForm from './components/Manager/Teams/TeamsForm'
 import Home from './components/Home'
-import EmployeeList from './components/Manager/Employees/EmployeeList'
 import ManagerHome from './components/Manager/ManagerHome'
 import EmployeeHome from './components/Employee/EmployeeHome'
+import ProtectedRoute from './components/Auth/ProtectedRoute'
+import { getUserFromToken } from './components/lib/auth'
+import { useState } from 'react'
 
 function App() {
+  const [user, setUser] = useState(getUserFromToken())
   return (
     <Router>
-      
-      <Routes>
-        <Route path='/' element={<Home/>}/>
 
-        <Route path='/employee/:employeeId' element={<EmployeeHome />} />
-        <Route path='/manager/:managerId' element={<ManagerHome />} />
-        <Route path='/manager/employees' element={<EmployeeList/>}/>
+      <Routes>
+        <Route path='/' element={<Home setUser={setUser} />} />
+
+        <Route path='/employee/:employeeId' element={<ProtectedRoute>
+          <EmployeeHome setUser={setUser} />
+        </ProtectedRoute>} />
+
+        <Route path='/manager/:managerId' element={<ProtectedRoute>
+          <ManagerHome setUser={setUser} />
+        </ProtectedRoute>} />
+
       </Routes>
     </Router>
   )

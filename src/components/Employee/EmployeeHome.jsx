@@ -2,13 +2,15 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router'
 import './EmployeeHome.css'
-import { MdLogout, MdOutlineMail } from "react-icons/md" //react-icons website
+import { MdOutlineMail } from "react-icons/md" //react-icons website
 import { GoClock } from "react-icons/go"
 import { FaUmbrellaBeach } from "react-icons/fa"
 import Shifts from './Shifts/Shifts'
 import Requests from './Requests/Requests'
+import { authRequest } from '../lib/auth'
+import LogOutButton from '../Auth/LogOutButton'
 
-function EmployeeHome() {
+function EmployeeHome({setUser}) {
     const { employeeId } = useParams()
     const [employee, setEmployee] = useState({})
     const [errors, setErrors] = useState(null)
@@ -18,7 +20,7 @@ function EmployeeHome() {
 
     async function getEmployee() {
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/employees/${employeeId}`)
+            const response = await authRequest({method:'get',url:`http://127.0.0.1:8000/api/employees/${employeeId}`})
             setEmployee(response.data)
         } catch (error) {
             console.log(error)
@@ -27,7 +29,7 @@ function EmployeeHome() {
     }
     async function getVacationRequests() {
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/vrequests/`)
+            const response = await authRequest({method:'get',url:`http://127.0.0.1:8000/api/vrequests/`})
             setRequests(response.data)
             const employeeRequests = response.data.filter(request =>
                 request.employee === Number(employeeId)
@@ -62,7 +64,7 @@ function EmployeeHome() {
                     </div>
 
                 </div>
-                <button className='logout-btn'><MdLogout />Logout</button>
+                <LogOutButton setUser={setUser}/>
             </div>
             <div className='e-home-body'>
 

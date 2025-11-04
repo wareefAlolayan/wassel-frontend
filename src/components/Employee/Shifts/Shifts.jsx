@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { authRequest } from '../../lib/auth'
 import { useParams } from 'react-router'
 import { MdOutlineDateRange } from "react-icons/md"
 import './Shifts.css'
@@ -10,7 +11,7 @@ function Shifts() {
     const today = new Date()
 
     async function upcomingShifts() {
-        const response = await axios.get('http://127.0.0.1:8000/api/shifts/')
+        const response = await authRequest({method:'get',url:'http://127.0.0.1:8000/api/shifts/'})
 
         const employeeShifts = response.data.filter(shift => {
             const shiftDate = new Date(shift.date)

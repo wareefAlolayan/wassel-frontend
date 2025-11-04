@@ -1,7 +1,7 @@
-import React from 'react'
 import '../App.css'
+import Login from './Auth/login'
 
-function Home() {
+function Home({setUser}) {
   return (
     <div className='main-page'>
       <div className='left-side'>
@@ -14,7 +14,7 @@ function Home() {
         </div>
       </div>
       <div className='right-side'>
-        login component will go here
+        <Login setUser={setUser}/>
       </div>
     </div>
   )

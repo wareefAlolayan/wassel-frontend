@@ -3,6 +3,7 @@ import { MdNavigateBefore, MdNavigateNext } from "react-icons/md"
 import './ShiftBoard.css'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { authRequest } from '../../lib/auth'
 
 function ShiftBoard() {
     const today = new Date() //ref reactgo Fri Oct 31 2025 17:09:20 GMT+0300 (Arabian Standard Time
@@ -20,7 +21,7 @@ function ShiftBoard() {
 
     async function getEmployees() {
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/employees/`)
+            const response = await authRequest({method:'get',url:`http://127.0.0.1:8000/api/employees/`})
             const nonManagers = response.data.filter(emp => emp.is_manager !== true)
             setEmployees(nonManagers)  // Store non-manager employees
         } catch (error) {
@@ -30,7 +31,7 @@ function ShiftBoard() {
     }
     async function getShifts() {
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/shifts`)
+            const response = await authRequest({method:'get',url:`http://127.0.0.1:8000/api/shifts`})
             setShifts(response.data)
         } catch (error) {
             console.log(error)
@@ -72,7 +73,7 @@ function ShiftBoard() {
     }
 
     async function getVacationRequests() {
-        const response = await axios.get('http://127.0.0.1:8000/api/vrequests/')
+        const response = await authRequest({method:'get',url:'http://127.0.0.1:8000/api/vrequests/'})
         const pendingRequests = response.data.filter(request => request.status === 'P')
         setRequests(pendingRequests)
     }
