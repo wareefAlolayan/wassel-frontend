@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router'
+import './RequestForm.css'
 
 function RequestForm({ requestId, setEditReq, setEditing, setAllRequests, allRequests, employee, createRequest }) {
     const [formData, setFormData] = useState({
@@ -48,17 +49,25 @@ function RequestForm({ requestId, setEditReq, setEditing, setAllRequests, allReq
 
     return (
         <div>
-            <h1>{requestId ? `Edit ` : 'Create a new vacation request 🌴'} </h1>
+            <h1 className='form-title' >{requestId ? `Edit ` : 'Create a new vacation request 🌴'} </h1>
             <form onSubmit={handleSubmit} >
                 <div>
-                    <label htmlFor='start_date'>Start Date : </label>
-                    <input value={formData.start_date} type='date' id='start_date' name='start_date' onChange={handleChange} />
-                    <label htmlFor='end_date'>End Date : </label>
-                    <input value={formData.end_date} type='date' id='end_date' name='end_date' onChange={handleChange} />
-                    <label htmlFor='reason'>Reason : </label>
-                    <textarea value={formData.reason} id='reason' name='reason' onChange={handleChange} />
+                    <div className='date-fields'>
+                        <div className='input-group'>
+                            <label htmlFor='start_date'>Start Date : </label>
+                            <input value={formData.start_date} type='date' id='start_date' name='start_date' onChange={handleChange} />
+                        </div>
+                        <div className='input-group'>
+                            <label htmlFor='end_date'>End Date : </label>
+                            <input value={formData.end_date} type='date' id='end_date' name='end_date' onChange={handleChange} />
+                        </div>
+                    </div>
+                    <div className='input-group full-width' >
+                        <label htmlFor='reason'>Reason : </label>
+                        <textarea value={formData.reason} id='reason' name='reason' onChange={handleChange} />
+                    </div>
                 </div>
-                <button type='submit'>Submit</button>
+                <button className='submit-button' type='submit'>Submit</button>
             </form>
         </div>
     )
