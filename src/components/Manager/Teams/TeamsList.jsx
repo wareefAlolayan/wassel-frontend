@@ -1,13 +1,10 @@
 import { useState, useEffect } from 'react'
 import TeamsForm from './TeamsForm'
-import axios from 'axios'
-import { useNavigate } from 'react-router'
 import { authRequest } from '../../lib/auth'
 import './TeamsList.css'
 
 function TeamsList() {
     const [teams, setTeams] = useState([])
-    const navigate = useNavigate()
     const [editing, setEditing] = useState(false)
     const [editTeam, setEditTeam] = useState(null)
 

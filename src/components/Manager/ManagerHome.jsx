@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import { useParams } from 'react-router'
 import './ManagerHome.css'
 import EmployeeList from './Employees/EmployeeList'
@@ -18,7 +17,6 @@ function ManagerHome({setUser}) {
   async function getManager() {
     try {
       const response = await authRequest({method:'get',url:`http://127.0.0.1:8000/api/employees/${managerId}`})
-      console.log(response.data)
       setManager(response.data)
     } catch (error) {
       console.log(error)
@@ -44,7 +42,7 @@ function ManagerHome({setUser}) {
         <div className='bar-left'>
           <img src='/src/components/assets/wassel_logo.png' alt='Wassel Logo' className='logo' />
           <div className='bar-welcome'>
-            <p>Welcome ,</p>
+            <p>Welcome back,</p>
             <p id='manager-name'>{manager.name}</p>
           </div>
 

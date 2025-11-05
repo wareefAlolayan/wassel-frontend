@@ -1,16 +1,13 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 import { authRequest } from '../../lib/auth'
-import { useParams } from 'react-router'
 import './RequestForm.css'
 
-function RequestForm({ requestId, setEditReq, setEditing, setAllRequests, allRequests, employee, createRequest }) {
+function RequestForm({ requestId, setEditReq, setEditing, setAllRequests, allRequests, createRequest }) {
     const [formData, setFormData] = useState({
         start_date: '',
         end_date: '',
         reason: ''
     })
-    const { employeeId } = useParams()
 
     async function getSingleRequest() {
         const response = await authRequest({method:'get',url:`http://127.0.0.1:8000/api/vrequests/${requestId}`})

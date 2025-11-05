@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import { useParams } from 'react-router'
 import './EmployeeHome.css'
 import { MdOutlineMail } from "react-icons/md" //react-icons website
@@ -15,7 +14,6 @@ function EmployeeHome({setUser}) {
     const [employee, setEmployee] = useState({})
     const [errors, setErrors] = useState(null)
     const [activeTab, setActiveTab] = useState('myShifts')
-    const [requests, setRequests] = useState([])
     const [pendingRequests, setPendingRequests] = useState(0)
 
     async function getEmployee() {
@@ -30,7 +28,6 @@ function EmployeeHome({setUser}) {
     async function getVacationRequests() {
         try {
             const response = await authRequest({method:'get',url:`http://127.0.0.1:8000/api/vrequests/`})
-            setRequests(response.data)
             const employeeRequests = response.data.filter(request =>
                 request.employee === Number(employeeId)
             )

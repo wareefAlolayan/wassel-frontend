@@ -1,12 +1,10 @@
-import React from 'react'
 import { MdNavigateBefore, MdNavigateNext } from "react-icons/md"
 import './ShiftBoard.css'
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import { authRequest } from '../../lib/auth'
 
 function ShiftBoard() {
-    const today = new Date() //ref reactgo Fri Oct 31 2025 17:09:20 GMT+0300 (Arabian Standard Time
+    const today = new Date() //ref reactgo example output:Fri Oct 31 2025 17:09:20 GMT+0300 (Arabian Standard Time
     const thisWeekFirstDay = getFirstDayOfWeek(today)
     const [firstDay, setFirstDay] = useState(thisWeekFirstDay)
     const [weekDays, setWeekDays] = useState({})
@@ -17,7 +15,6 @@ function ShiftBoard() {
     let works = 0
 
     let away = []
-    // const onLeave = [...new Set(away)] // geeksforgeeks
 
     async function getEmployees() {
         try {
@@ -59,7 +56,6 @@ function ShiftBoard() {
         }
         return week
     }
-    console.log(createWeekDict(firstDay))
 
     function goPrevWeek() {
         const d = new Date(firstDay)
@@ -146,9 +142,6 @@ function ShiftBoard() {
         })
         let onLeave = [...new Set(away)]
 
-        console.log('away   :::::::::: ' + date + '  ' + away)
-        console.log('onleave   :::::::::: ' + onLeave)
-        console.log(onLeave.length)
         return onLeave.length
     }
     function calculateOnLeave() {

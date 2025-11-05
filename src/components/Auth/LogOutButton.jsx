@@ -1,4 +1,3 @@
-import React from 'react'
 import { clearTokens } from '../lib/auth' 
 import { useNavigate } from 'react-router'
 import { MdLogout } from "react-icons/md" //react-icons website

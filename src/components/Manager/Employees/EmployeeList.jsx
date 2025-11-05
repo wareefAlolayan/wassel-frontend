@@ -1,6 +1,5 @@
 import {useState , useEffect} from 'react'
 import EmployeeCard from './EmployeeCard'
-import axios from 'axios'
 import { authRequest } from '../../lib/auth'
 import './EmployeeList.css'
 

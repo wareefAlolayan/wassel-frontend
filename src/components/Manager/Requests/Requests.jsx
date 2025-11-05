@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 import { authRequest } from '../../lib/auth'
 import './Requests.css'
 
@@ -28,7 +27,7 @@ function Requests() {
         getVacationRequests()
     }
 
-    function getEmployeeName(empId) {
+    function getEmployee(empId) {
         const employee = employees.find(emp => emp.id === empId)
         return employee
     }
@@ -53,8 +52,8 @@ function Requests() {
                                         <li key={request.id}>
                                             <div className='r-top'>
                                                 <div className='r-t-left'>
-                                                    <p className='r-e-name' >{getEmployeeName(request.employee)?.name}</p>
-                                                    <p className='r-e-team'>{getEmployeeName(request.employee)?.team?.name}</p>
+                                                    <p className='r-e-name' >{getEmployee(request.employee)?.name}</p>
+                                                    <p className='r-e-team'>{getEmployee(request.employee)?.team?.name}</p>
                                                     <p className='r-dates'>{request.start_date} - {request.end_date}</p>
                                                 </div>
                                                 <div className='r-t-right'>

@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import { authRequest } from '../../lib/auth'
 import { useParams } from 'react-router'
 import RequestForm from './RequestForm'
@@ -72,22 +71,16 @@ function Requests({ employee }) {
         getPending()
         getComplete()
     }, [employeeRequests])
-
-    // console.log('allRequests' , allRequests)
-    // console.log('employeeRequests' , employeeRequests)
-    // console.log('pending' , pending)
-    // console.log('complete' , complete)
-
-
+    
     return (
         <div>
             {
                 editing ? (
-                    < RequestForm requestId={editReq} setEditReq={setEditReq} setEditing={setEditing} setAllRequests={setAllRequests} allRequests={allRequests} employee={employee} />
+                    < RequestForm requestId={editReq} setEditReq={setEditReq} setEditing={setEditing} setAllRequests={setAllRequests} allRequests={allRequests}/>
                 ) :
                     (
                         <div>
-                            <RequestForm createRequest={createRequest} employee={employee} />
+                            <RequestForm createRequest={createRequest}/>
 
                             <h2>Pending Requests :</h2>
                             {

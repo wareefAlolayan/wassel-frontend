@@ -1,4 +1,3 @@
-import React from "react"
 import { getUserFromToken } from "../lib/auth" 
 import { Navigate } from "react-router"
 

@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import { authRequest } from '../../lib/auth'
 import { useParams } from 'react-router'
 import { MdOutlineDateRange } from "react-icons/md"
