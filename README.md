@@ -1,11 +1,11 @@
-## Project Description
+# Project Description
 This is the frontend for Wassel (means "connector" in english) , a platform that connects manager to his/her employees .it makes the decision making process easier and simplifies orgnizing employees , teams , shifts ,and requests. also it allows the employee to view upcoming shifts as well as tracking vacation requests status , update or cancel them , and make new ones. 
 
 ## Repository Description
 
 This repository contains the frontend code for Wassel . It interacts with the backend to get and display data, such as employee details, team data, shifts, and vacation requests.
 
-# Components Table
+## Components Table
 | **Component** | **Description** |
 | -------------------------------------- | --------------------------------------------------------------------- |
 | **auth.js** | Manages authentication tokens (login/logout, token storage). |
