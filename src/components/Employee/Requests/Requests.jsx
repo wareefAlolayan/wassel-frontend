@@ -149,7 +149,7 @@ function Requests({ employee }) {
                                                                         <p className='r-e-name'>{employee.name}</p>
                                                                         <p className='r-e-team'>{employee.team?.name}</p>
                                                                         <p className='r-dates'>{request.start_date}  -  {request.end_date}</p>
-                                                                        
+
                                                                     </div>
                                                                     <div className='r-t-right'>
                                                                         <p>{request.status === 'A' ? 'accepted' : 'denied'}</p>

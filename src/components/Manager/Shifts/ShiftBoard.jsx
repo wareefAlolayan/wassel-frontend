@@ -22,7 +22,7 @@ function ShiftBoard() {
     async function getEmployees() {
         try {
             const response = await authRequest({method:'get',url:`http://127.0.0.1:8000/api/employees/`})
-            const nonManagers = response.data.filter(emp => emp.is_manager !== true)
+            const nonManagers = response.data.filter(emp => emp.is_manager !== true && !emp.email.startsWith('admin'))
             setEmployees(nonManagers)  // Store non-manager employees
         } catch (error) {
             console.log(error)

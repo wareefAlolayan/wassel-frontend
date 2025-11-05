@@ -1,0 +1,77 @@
+.m-employee-card {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    text-align: center; 
+    border: 1px solid #a87e007e; 
+    width: 100%;
+    margin: 10px ;
+}
+.m-employee-card:hover{
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.484);
+}
+
+.m-personal-info {
+    margin-bottom: 15px; 
+}
+
+.m-personal-info #c-name {
+    font-size: 20px;
+    font-weight: 600; 
+    color: #333;
+    margin-bottom: 5px; 
+}
+
+.m-personal-info #c-team {
+    font-size: 15px;
+    color: #666; 
+    margin: 0;
+}
+
+.m-contact {
+    margin-bottom: 20px;
+}
+
+.m-contact p {
+    font-size: 14px;
+    color: #555;
+    display: flex;
+    align-items: center; 
+    gap: 8px;
+    margin: 0;
+}
+
+.m-contact p svg {
+    color: #6b7280; 
+    font-size: 20pxem;
+}
+
+.divider {
+    width: 100%; 
+    border: none;
+    border-top: 1px solid #e0e7ff; 
+    margin: 20px 0; 
+}
+
+.vaction-info {
+    width: 100%; 
+    padding: 0 10px;
+    text-align: center;
+}
+
+.vaction-info p {
+    font-size: 16px;
+    color: #444;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 12px;
+}
+
+.vaction-info p svg {
+    font-size: 19px; 
+    color: #f59d06;
+}

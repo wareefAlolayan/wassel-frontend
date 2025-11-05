@@ -1,11 +1,21 @@
-import React from 'react'
+import { MdOutlineMail } from "react-icons/md" 
+import { FaUmbrellaBeach } from "react-icons/fa"
+import './EmployeeCard.css'
 
-function EmployeeCard({employee}) {
+function EmployeeCard({ employee }) {
   return (
-    <div>
-        <h3>{employee?.name} - {employee?.team?.name}</h3>
-        <p> email : {employee?.email} </p>
-        <p> Vacation days left : {employee?.vaction_days_left}</p>
+    <div className='m-employee-card'>
+      <div className='m-personal-info'>
+        <p id="c-name">{employee?.name} </p>
+        <p id="c-team">{employee?.team?.name}</p>
+      </div>
+      <div className='m-contact'>
+        <p> <MdOutlineMail /> {employee?.email} </p>
+      </div>
+      <hr className='divider' />
+      <div className='vaction-info'>
+        <p><FaUmbrellaBeach /> {employee?.vaction_days_left} vacation days left</p>
+      </div>
     </div>
   )
 }

@@ -1,0 +1,26 @@
+.r-actions #approve-btn {
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 15px;
+    width: 50%;
+    background-color: #00A63E ;
+    border-color: #39d271;
+}
+
+.r-actions #approve-btn:hover {
+    background-color:#00c448;
+}
+.r-actions #deny-btn {
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 15px;
+    width: 50%;
+    border-color: #FFE6E6;
+    color:#C40C13;
+    background-color: #FAFAFA;
+}
+
+.r-actions #deny-btn:hover {
+    background-color:#c40c1215;
+    color: #d80910;
+}

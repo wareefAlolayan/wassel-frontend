@@ -17,6 +17,7 @@ function Shifts() {
             const shiftDate = new Date(shift.date)
             return shift.employees.some(emp => emp.id === Number(employeeId)) && shiftDate >= today
         })
+        employeeShifts.reverse()
         setShifts(employeeShifts)
     }
     function dayName(shiftDate) {

@@ -1,0 +1,12 @@
+.employees-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /*css-tricks.com*/
+    justify-content: center;
+    gap: 20px; 
+    padding: 20px;
+    background-color: #f7f9fc4e; 
+    margin-left: 4%;
+}
+.card-container {
+    width: 200px;
+}
