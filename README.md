@@ -1,16 +1,44 @@
-# React + Vite
+## Project Description
+This is the frontend for Wassel (means "connector" in english) , a platform that connects manager to his/her employees .it makes the decision making process easier and simplifies orgnizing employees , teams , shifts ,and requests. also it allows the employee to view upcoming shifts as well as tracking vacation requests status , update or cancel them , and make new ones. 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Repository Description
 
-Currently, two official plugins are available:
+This repository contains the frontend code for Wassel . It interacts with the backend to get and display data, such as employee details, team data, shifts, and vacation requests.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Components Table
+| **Component** | **Description** |
+| -------------------------------------- | --------------------------------------------------------------------- |
+| **auth.js** | Manages authentication tokens (login/logout, token storage). |
+| **App.jsx** | Sets up routes for the app and manages user data after login. |
+| **Home.jsx** `path='/'` | Main homepage with login form, accessible by all users. |
+| **Auth/Login.jsx** | Handles login form and authenticates users. |
+| **Auth/LogOutButton.jsx** | Logs out the user by clearing tokens and redirecting to the login page. |
+| **Auth/ProtectedRoute.jsx** | Protects routes by checking for a valid user token. |
+| **Employee/Requests/RequestForm.jsx** | Displays the form for vacation requests (create/edit).|
+| **Employee/Requests/Requests.jsx** | Manages and displays vacation requests for employees. |
+| **Employee/Shifts/Shifts.jsx** | Displays upcoming shifts for the employee. |
+| **Employee/EmployeeHome.jsx** `path='/employee/:employeeId'` | Employee's dashboard with tabs to view shifts and requests. |
+| **Manager/Employees/EmployeeCard.jsx** | Displays individual employee's info in a card format. |
+| **Manager/Employees/EmployeeList.jsx** | Lists all employees excluding managers. |
+| **Manager/Requests/Requests.jsx** | Displays and handles pending vacation requests for the manager. |
+| **Manager/Shifts/Shifts.jsx** | Displays the shift board with employee shifts for the week. |
+| **Manager/Teams/TeamsForm.jsx** | Handles creating or editing teams. |
+| **Manager/Teams/TeamsList.jsx** | Lists teams and allows creation or editing of teams. |
+| **Manager/ManagerHome.jsx** `path='/manager/:managerId'` | Manager's home page with navigation to various sections. |
 
-## React Compiler
+## Tech Stack
+- React
+- Axios
+- React Router
+- JWT Authentication
+- React Icons
+- CSS
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Backend Repo Link
 
-## Expanding the ESLint configuration
+https://github.com/wareefAlolayan/wassel-backend
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## IceBox Features
+- add shift change requests
+- add password reset option
+- search and filter employees and shifts 
