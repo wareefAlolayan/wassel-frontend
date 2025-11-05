@@ -3,6 +3,7 @@ import axios from 'axios'
 import { authRequest } from '../../lib/auth'
 import { useParams } from 'react-router'
 import RequestForm from './RequestForm'
+import './Requests.css'
 
 function Requests({ employee }) {
     const { employeeId } = useParams()
@@ -17,7 +18,7 @@ function Requests({ employee }) {
 
     async function getVacationRequests() {
         try {
-            const response = await authRequest({method:'get',url:`http://127.0.0.1:8000/api/vrequests/`})
+            const response = await authRequest({ method: 'get', url: `http://127.0.0.1:8000/api/vrequests/` })
             setAllRequests(response.data)
         } catch (error) {
             console.log(error)
@@ -41,14 +42,14 @@ function Requests({ employee }) {
 
 
     async function createRequest(requestData) {
-        const response = await authRequest({method:'post',url:`http://127.0.0.1:8000/api/vrequests/employee/${employee.id}`,data:requestData})
+        const response = await authRequest({ method: 'post', url: `http://127.0.0.1:8000/api/vrequests/employee/${employee.id}`, data: requestData })
         setAllRequests([...allRequests, response.data])
 
     }
 
     async function deleteRequest(requestId) {
         try {
-            await authRequest({method:'delete',url:`http://127.0.0.1:8000/api/vrequests/${requestId}`})
+            await authRequest({ method: 'delete', url: `http://127.0.0.1:8000/api/vrequests/${requestId}` })
             setAllRequests(allRequests.filter(r => r.id !== requestId))
         } catch (err) {
             console.log(err)
@@ -82,7 +83,7 @@ function Requests({ employee }) {
         <div>
             {
                 editing ? (
-                    < RequestForm requestId={editReq} setEditReq={setEditReq} setEditing={setEditing} setAllRequests={setAllRequests} allRequests={allRequests} employee={employee}/>
+                    < RequestForm requestId={editReq} setEditReq={setEditReq} setEditing={setEditing} setAllRequests={setAllRequests} allRequests={allRequests} employee={employee} />
                 ) :
                     (
                         <div>
@@ -92,22 +93,42 @@ function Requests({ employee }) {
                             {
                                 pending.length ?
                                     (
-                                        <ul>
-                                            {
-                                                pending.map(request => (
-                                                    <li key={request.id}>
-                                                        {employee.name}
-                                                        {employee.team?.name}
-                                                        {request.status}
-                                                        {request.start_date}  -  {request.end_date}
-                                                        Reason : {request.reason}
+                                        <div className='requests-container'>
+                                            <ul>
+                                                {
+                                                    pending.map(request => (
+                                                        <div className='request-container'>
+                                                            <li key={request.id}>
+                                                                <div className='r-top'>
+                                                                    <div className='r-t-left'>
+                                                                        <p className='r-e-name' >{employee.name}</p>
+                                                                        <p className='r-e-team'>{employee.team?.name}</p>
+                                                                        <p className='r-dates'>{request.start_date}  -  {request.end_date}</p>
+                                                                    </div>
+                                                                    <div className='r-t-right'>
+                                                                        <p>pending</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div className='r-bottom'>
+                                                                    <p>Reason : {request.reason}</p>
+                                                                    <div className='r-actions'>
+                                                                        <button id='r-edit' onClick={() => handleContent(request.id)}>Edit</button>
+                                                                        <button id='r-cancel' onClick={() => deleteRequest(request.id)}>Cancel</button>
+                                                                    </div>
+                                                                </div>
 
-                                                        <button onClick={() => deleteRequest(request.id)}>Cancel</button>
-                                                        <button onClick={() => handleContent(request.id)}>Edit</button>
-                                                    </li>
-                                                ))
-                                            }
-                                        </ul>
+
+
+                                                            </li>
+
+                                                        </div>
+
+                                                    ))
+                                                }
+                                            </ul>
+
+                                        </div>
+
                                     ) :
                                     (
                                         <p>None at the moment</p>
@@ -117,19 +138,36 @@ function Requests({ employee }) {
                             {
                                 complete.length ?
                                     (
-                                        <ul>
-                                            {
-                                                complete.map(request => (
-                                                    <li key={request.id}>
-                                                        <p>{employee.name}</p>
-                                                        <p>{employee.team?.name}</p>
-                                                        <p>{request.status === 'A' ? 'Accepted' : 'Denied'}</p>
-                                                        <p>{request.start_date}  -  {request.end_date}</p>
-                                                        <p>Reason : {request.reason}</p>
-                                                    </li>
-                                                ))
-                                            }
-                                        </ul>
+                                        <div className='requests-container'>
+                                            <ul>
+                                                {
+                                                    complete.map(request => (
+                                                        <div className='request-container'>
+                                                            <li key={request.id}>
+                                                                <div className='r-top'>
+                                                                    <div className='r-t-left'>
+                                                                        <p className='r-e-name'>{employee.name}</p>
+                                                                        <p className='r-e-team'>{employee.team?.name}</p>
+                                                                        <p className='r-dates'>{request.start_date}  -  {request.end_date}</p>
+                                                                        
+                                                                    </div>
+                                                                    <div className='r-t-right'>
+                                                                        <p>{request.status === 'A' ? 'accepted' : 'denied'}</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div className='r-bottom'>
+                                                                    <p>Reason : {request.reason}</p>
+                                                                </div>
+
+
+                                                            </li>
+                                                        </div>
+
+                                                    ))
+                                                }
+                                            </ul>
+                                        </div>
+
                                     ) :
                                     (
                                         <p>None at the moment</p>
