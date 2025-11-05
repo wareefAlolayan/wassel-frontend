@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react'
 import axios from 'axios'
 import { useNavigate , useParams } from 'react-router'
 import { authRequest } from '../../lib/auth'
+import './TeamsForm.css'
 
 function TeamsForm({addTeam , teamId , setEditTeam , setEditing ,teams, setTeams}) { 
     const [name,setName]= useState('')
@@ -45,14 +46,14 @@ function TeamsForm({addTeam , teamId , setEditTeam , setEditing ,teams, setTeams
     }
   return (
     <div>
-        <h1>{  teamId ?  `Edit ${name}` : 'Add a new team👥'} </h1>
-        <form onSubmit={handleSubmit} >
+        <p className='t-form-title'>{  teamId ?  `Edit ${name}` : 'Add a new team👥'} </p>
+        <form className='team-form' onSubmit={handleSubmit} >
             <div>
-                <label htmlFor='name'>Team Name : </label>
-                <input value={formData.name} onChange={handleChange} id='name' name='name' />
+                <label className='tn-label' htmlFor='name'>Team Name : </label>
+                <input className='tn-input' value={formData.name} onChange={handleChange} id='name' name='name' />
 
             </div>
-            <button type='submit'>Submit</button>
+            <button className='t-btn' type='submit'>Submit</button>
         </form>
             
     </div>

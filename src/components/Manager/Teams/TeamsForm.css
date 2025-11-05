@@ -1,0 +1,60 @@
+.t-form-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.team-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%; 
+    max-width: 400px; 
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+    gap: 20px; 
+}
+.team-form  div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.tn-label {
+    font-size: 18px;
+    font-weight: 500;
+    color: #4b5563;
+    margin-bottom: 8px;
+}
+
+.tn-input {
+    padding: 12px 15px;
+    border: 1px solid #d1d5db; 
+    border-radius: 6px;
+    font-size: 17px;
+    color: #374151;
+    width: 100%;  
+}
+
+.tn-input:focus {
+    border-color: #01a90c; 
+    outline: none; 
+}
+
+.t-btn {
+    background-color:#2c9b19b9;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+.t-btn:hover {
+    background-color: #01aa2e;
+}

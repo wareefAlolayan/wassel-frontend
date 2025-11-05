@@ -59,8 +59,8 @@
     margin: 10px 0;
 }
 table{
-    border: 2px solid #cccbcb; 
-    border-radius:18px;
+    border: 1px solid #cccbcb; 
+    border-radius:10px;
 }
 .shifts-table thead tr {
     background-color:#F8F7F0;
