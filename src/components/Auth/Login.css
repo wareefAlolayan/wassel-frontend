@@ -1,0 +1,41 @@
+.login-form {
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+    height: 30%;
+    padding: 20px;
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.626);
+    background-color: #F8F7F0;
+}
+
+.login-email,.login-password {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #78778D;
+}
+
+.login-email:focus,.login-password:focus {
+    border-color: #FD7046;
+    outline: none;
+}
+
+.login-button {
+    background-color:#78778D; 
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer; 
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.login-button:hover {
+    background-color: #FCB7A0; 
+}

@@ -2,6 +2,7 @@ import { useState , useEffect } from "react"
 import axios from "axios"
 import { saveTokens , getUserFromToken } from "../lib/auth" 
 import { useNavigate } from "react-router"
+import './Login.css'
 
 export default function Login({ setUser }) {
   const [email, setEmail] = useState("")
@@ -42,10 +43,10 @@ export default function Login({ setUser }) {
     roleNavigation()
   }, [employee])
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="email" placeholder="email" value={email} onChange={e => setEmail(e.target.value)} />
-      <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-      <button type="submit">Login</button>
+    <form className="login-form" onSubmit={handleSubmit}>
+      <input className="login-email" type="email" placeholder="email" value={email} onChange={e => setEmail(e.target.value)} />
+      <input className="login-password" type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+      <button className="login-button" type="submit">Login</button>
     </form>
   )
 }

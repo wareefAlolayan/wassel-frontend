@@ -32,7 +32,7 @@ function RequestForm({ requestId, setEditReq, setEditing, setAllRequests, allReq
         event.preventDefault()
         let response = {}
         if (requestId) {
-            response = await authRequest({method:'post',url:`http://127.0.0.1:8000/api/vrequests/${requestId}`,data: formData})
+            response = await authRequest({method:'patch',url:`http://127.0.0.1:8000/api/vrequests/${requestId}`,data: formData})
             setAllRequests(allRequests.map(request => request.id === requestId ? { ...request, ...formData } : request))
             setEditing(false)
             setEditReq(null)
